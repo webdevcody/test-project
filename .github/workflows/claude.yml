@@ -44,5 +44,10 @@ jobs:
           custom_instructions: |
             You are running in automation mode triggered by Discord.
             Workflow Tracking ID: ${{ github.event.inputs.tracking_id }}
-            Always push to main branch.
-            Do not finish without pushing to main branch.
+            
+            IMPORTANT: You MUST commit and push your changes to the main branch:
+            1. After making your changes, run: git add .
+            2. Create a commit: git commit -m "Your descriptive commit message"
+            3. Push to main: git push origin main
+            
+            Do not finish without committing and pushing to the main branch.
