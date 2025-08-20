@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ice Cream Paradise</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #fafafa;
+            min-height: 100vh;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.125rem;
+            color: #6b7280;
+            margin-bottom: 48px;
+            font-weight: 400;
+        }
+
+        .header-section {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+        }
+
+        .fun-facts {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 32px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+        }
+
+        .fun-facts h2 {
+            font-size: 1.875rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #1a1a1a;
+        }
+
+        .fact {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 16px 0;
+            border-left: 4px solid #3b82f6;
+            transition: all 0.2s ease;
+        }
+
+        .fact:hover {
+            background: #f3f4f6;
+            transform: translateX(4px);
+        }
+
+        .fact strong {
+            color: #1f2937;
+            font-weight: 600;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 48px;
+            padding: 32px;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .tabs-container {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin: 32px 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 8px;
+            background: #f9fafb;
+            padding: 6px;
+            border-radius: 12px;
+        }
+
+        .tab {
+            background: transparent;
+            color: #6b7280;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .tab:hover {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .tab.active {
+            background: white;
+            color: #1f2937;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            font-weight: 600;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .flavor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 24px 0;
+        }
+
+        .flavor-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+            border: 1px solid #e5e7eb;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flavor-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: #d1d5db;
+        }
+
+        .flavor-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .flavor-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .flavor-description {
+            color: #6b7280;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .cycle-info {
+            background: #eff6ff;
+            color: #1e40af;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 24px 0;
+            font-weight: 500;
+            border: 1px solid #dbeafe;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-section">
+            <h1>Ice Cream Paradise</h1>
+            <p class="subtitle">Discover our premium collection of artisanal ice cream flavors</p>
+            
+            <div class="cycle-info">
+                Browse through different ice cream categories using the tabs below
+            </div>
+        </div>
+
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('classic')">Classic</button>
+                <button class="tab" onclick="showTab('fruity')">Fruity</button>
+                <button class="tab" onclick="showTab('chocolate')">Chocolate</button>
+                <button class="tab" onclick="showTab('specialty')">Specialty</button>
+                <button class="tab" onclick="showTab('premium')">Premium</button>
+                <button class="tab" onclick="showTab('seasonal')">Seasonal</button>
+            </div>
+
+            <div id="classic" class="tab-content active">
+                <div class="flavor-grid">
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🍦</span>
+                        <div class="flavor-name">Vanilla Bean</div>
+                        <div class="flavor-description">Rich Madagascar vanilla with real bean specks</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🍫</span>
+                        <div class="flavor-name">Chocolate Fudge</div>
+                        <div class="flavor-description">Decadent dark chocolate with fudge swirls</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🍓</span>
+                        <div class="flavor-name">Strawberry</div>
+                        <div class="flavor-description">Fresh strawberry with real fruit pieces</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🍪</span>
+                        <div class="flavor-name">Cookies & Cream</div>
+                        <div class="flavor-description">Vanilla ice cream with chocolate cookie chunks</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🥛</span>
+                        <div class="flavor-name">Neapolitan</div>
+                        <div class="flavor-description">Classic trio of vanilla, chocolate, and strawberry</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="fruity" class="tab-content">
+                <div class="flavor-grid">
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🍑</span>
+                        <div class="flavor-name">Cherry Garcia</div>
+                        <div class="flavor-description">Sweet cherry ice cream with chocolate chunks</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🥭</span>
+                        <div class="flavor-name">Mango Tango</div>
+                        <div class="flavor-description">Tropical mango with coconut flakes</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🍌</span>
+                        <div class="flavor-name">Banana Split</div>
+                        <div class="flavor-description">Banana ice cream with nuts and cherries</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🫐</span>
+                        <div class="flavor-name">Blueberry Cheesecake</div>
+                        <div class="flavor-description">Blueberry ice cream with cheesecake pieces</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🍊</span>
+                        <div class="flavor-name">Orange Sherbet</div>
+                        <div class="flavor-description">Refreshing orange sorbet with citrus zest</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="chocolate" class="tab-content">
+                <div class="flavor-grid">
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🏔️</span>
+                        <div class="flavor-name">Rocky Road</div>
+                        <div class="flavor-description">Chocolate with marshmallows and nuts</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🍫</span>
+                        <div class="flavor-name">Double Chocolate</div>
+                        <div class="flavor-description">Rich chocolate with chocolate chips</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🥜</span>
+                        <div class="flavor-name">Chocolate Peanut Butter</div>
+                        <div class="flavor-description">Chocolate base with peanut butter swirls</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🍪</span>
+                        <div class="flavor-name">Brownie Batter</div>
+                        <div class="flavor-description">Chocolate ice cream with brownie chunks</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🧈</span>
+                        <div class="flavor-name">Salted Caramel Chocolate</div>
+                        <div class="flavor-description">Dark chocolate with salted caramel ribbons</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="specialty" class="tab-content">
+                <div class="flavor-grid">
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🌱</span>
+                        <div class="flavor-name">Mint Chocolate Chip</div>
+                        <div class="flavor-description">Cool mint with dark chocolate chips</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🎂</span>
+                        <div class="flavor-name">Birthday Cake</div>
+                        <div class="flavor-description">Vanilla cake batter with colorful sprinkles</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🍭</span>
+                        <div class="flavor-name">Cotton Candy</div>
+                        <div class="flavor-description">Pink and blue swirled carnival favorite</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🌰</span>
+                        <div class="flavor-name">Pistachio</div>
+                        <div class="flavor-description">Creamy pistachio with crushed nuts</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">☕</span>
+                        <div class="flavor-name">Coffee Bean</div>
+                        <div class="flavor-description">Rich espresso with chocolate-covered beans</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="premium" class="tab-content">
+                <div class="flavor-grid">
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🌹</span>
+                        <div class="flavor-name">Rose Petal</div>
+                        <div class="flavor-description">Delicate rose flavor with edible petals</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🍯</span>
+                        <div class="flavor-name">Lavender Honey</div>
+                        <div class="flavor-description">Floral lavender with organic honey swirls</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🥥</span>
+                        <div class="flavor-name">Black Sesame</div>
+                        <div class="flavor-description">Nutty Asian-inspired premium flavor</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🧁</span>
+                        <div class="flavor-name">Earl Grey</div>
+                        <div class="flavor-description">Sophisticated tea-infused ice cream</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🍷</span>
+                        <div class="flavor-name">Wine & Fig</div>
+                        <div class="flavor-description">Elegant wine reduction with fresh figs</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="seasonal" class="tab-content">
+                <div class="flavor-grid">
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🎃</span>
+                        <div class="flavor-name">Pumpkin Spice</div>
+                        <div class="flavor-description">Fall favorite with warm spices</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🍪</span>
+                        <div class="flavor-name">Gingerbread</div>
+                        <div class="flavor-description">Holiday spiced with cookie pieces</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🍑</span>
+                        <div class="flavor-name">Cherry Blossom</div>
+                        <div class="flavor-description">Spring-inspired delicate cherry flavor</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🥤</span>
+                        <div class="flavor-name">Eggnog</div>
+                        <div class="flavor-description">Creamy holiday tradition with nutmeg</div>
+                    </div>
+                    <div class="flavor-card">
+                        <span class="flavor-emoji">🌞</span>
+                        <div class="flavor-name">Lemon Sorbet</div>
+                        <div class="flavor-description">Refreshing summer citrus cleanser</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fun-facts">
+            <h2>Cool Ice Cream Facts</h2>
+            
+            <div class="fact">
+                <strong>Brain Freeze Science:</strong> That painful sensation happens when cold ice cream touches the roof of your mouth, causing blood vessels to rapidly contract and expand!
+            </div>
+            
+            <div class="fact">
+                <strong>American Favorite:</strong> The average American consumes about 23 pounds of ice cream per year. That's roughly 4 gallons of pure deliciousness!
+            </div>
+            
+            <div class="fact">
+                <strong>Birthday Tradition:</strong> Ice cream cake was invented in the 1930s by combining two of the world's favorite desserts into one amazing treat!
+            </div>
+            
+            <div class="fact">
+                <strong>Global Love:</strong> New Zealand has the highest ice cream consumption per capita in the world, followed closely by the United States and Australia!
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Life is better with ice cream!</p>
+            <p>Crafted with care and premium ingredients</p>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Auto-cycle through tabs every 10 seconds
+        let currentTabIndex = 0;
+        const tabNames = ['classic', 'fruity', 'chocolate', 'specialty', 'premium', 'seasonal'];
+        
+        function autoRotateTabs() {
+            currentTabIndex = (currentTabIndex + 1) % tabNames.length;
+            const nextTab = tabNames[currentTabIndex];
+            
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show next tab content
+            document.getElementById(nextTab).classList.add('active');
+
+            // Add active class to next tab
+            const tabButtons = document.querySelectorAll('.tab');
+            tabButtons[currentTabIndex].classList.add('active');
+        }
+
+        // Start auto-rotation (uncomment to enable)
+        // setInterval(autoRotateTabs, 10000);
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+                event.preventDefault();
+                
+                if (event.key === 'ArrowRight') {
+                    currentTabIndex = (currentTabIndex + 1) % tabNames.length;
+                } else {
+                    currentTabIndex = (currentTabIndex - 1 + tabNames.length) % tabNames.length;
+                }
+                
+                const nextTab = tabNames[currentTabIndex];
+                
+                // Hide all tab contents
+                const tabContents = document.querySelectorAll('.tab-content');
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+
+                // Remove active class from all tabs
+                const tabs = document.querySelectorAll('.tab');
+                tabs.forEach(tab => {
+                    tab.classList.remove('active');
+                });
+
+                // Show selected tab content
+                document.getElementById(nextTab).classList.add('active');
+
+                // Add active class to selected tab
+                const tabButtons = document.querySelectorAll('.tab');
+                tabButtons[currentTabIndex].classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
